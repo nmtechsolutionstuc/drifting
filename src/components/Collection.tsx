@@ -6,7 +6,8 @@ import joggerRojo from "../assets/products/baggys-rusticos-2.webp";
 import joggerRustico from "../assets/products/baggys-rusticos-1.webp";
 import jeansBaggy from "../assets/products/jeans-baggy.webp";
 import remera from "../assets/products/remeras-1.webp";
-import { whatsappLink } from "../lib/constants";
+import { AtSign } from "lucide-react";
+import { BRAND, whatsappLink } from "../lib/constants";
 
 const PRODUCTS = [
   { name: "Jean Baggy", tag: "MÁS PEDIDO", img: jeansBaggy, angle: "-rotate-2" },
@@ -68,6 +69,18 @@ export default function Collection() {
               </div>
             </a>
           ))}
+        </div>
+
+        <div className="mt-12 flex justify-center sm:mt-16">
+          <a
+            href={BRAND.instagramUrl}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="inline-flex items-center gap-2 border-2 border-bone px-6 py-3 font-mono text-xs font-bold uppercase tracking-widest text-bone transition hover:bg-bone hover:text-ink"
+          >
+            <AtSign size={16} strokeWidth={2.5} />
+            Ver más prendas
+          </a>
         </div>
       </div>
     </section>
