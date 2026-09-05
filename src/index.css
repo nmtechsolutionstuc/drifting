@@ -1,0 +1,125 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Bebas Neue", "Arial Narrow", sans-serif;
+  --font-body: "Archivo", sans-serif;
+  --font-mono: "Space Mono", monospace;
+
+  --color-ink: #0e0d0c;
+  --color-ink-soft: #171513;
+  --color-bone: #f3f1ec;
+  --color-bone-dim: #cfccc3;
+  --color-flare: #ff3d8a;
+  --color-acid: #c6ff3d;
+  --color-rust: #ff6a3d;
+
+  --animate-marquee: marquee 22s linear infinite;
+  --animate-cascade: cascade 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@layer base {
+  html {
+    background: var(--color-ink);
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--color-ink);
+    color: var(--color-bone);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: var(--color-flare);
+    color: var(--color-ink);
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+  }
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+
+  /* cheap-print misregistration: a 1-2px chromatic offset on hover/focus */
+  .misregister {
+    position: relative;
+    transition: transform 150ms ease;
+  }
+  .misregister::before,
+  .misregister::after {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 150ms ease, transform 150ms ease;
+    pointer-events: none;
+  }
+  .misregister::before {
+    color: var(--color-flare);
+    transform: translate(0, 0);
+  }
+  .misregister::after {
+    color: var(--color-acid);
+    transform: translate(0, 0);
+  }
+  .misregister:hover::before,
+  .misregister:focus-visible::before {
+    opacity: 0.7;
+    transform: translate(-2px, 1px);
+  }
+  .misregister:hover::after,
+  .misregister:focus-visible::after {
+    opacity: 0.7;
+    transform: translate(2px, -1px);
+  }
+
+  .grain {
+    position: relative;
+  }
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.35;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+    background-size: 180px 180px;
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes cascade {
+    from {
+      opacity: 0;
+      transform: translateY(0.5em);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0s !important;
+      transition-delay: 0s !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
