@@ -5,7 +5,6 @@ import Hero from "./components/Hero";
 import Navbar from "./components/Navbar";
 import Newsletter from "./components/Newsletter";
 import SizeGuide from "./components/SizeGuide";
-import SocialProof from "./components/SocialProof";
 import TrustBar from "./components/TrustBar";
 import ValueProps from "./components/ValueProps";
 
@@ -24,7 +23,6 @@ export default function App() {
         <TrustBar />
         <Collection />
         <ValueProps />
-        <SocialProof />
         <SizeGuide />
         <FAQ />
         <Newsletter />
